@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import Layout from '../../components/Layout';
 import Campaign from '../../ethereum/campaign';
-import {Card} from 'semantic-ui-react';
+import {Card, Grid} from 'semantic-ui-react';
 import web3 from '../../ethereum/web3';
+import ContributeForm from '../../components/ContributeForm';
+imop
 
 class CampaignShow extends Component {
     // this is a separate props object than the one that
@@ -14,6 +16,7 @@ class CampaignShow extends Component {
         const summary = await campaign.methods.getSummary().call();
 
         return {
+            address: props.query.address,
             minimumContribution: summary[0],
             balance: summary[1],
             requestsCount: summary[2],
@@ -35,7 +38,7 @@ class CampaignShow extends Component {
                 header: manager,
                 meta: 'Address of Manager',
                 description: 'The manager created this campaign and can create request to withdraw money',
-                style: { overflowWrap: 'break-word'}
+                style: {overflowWrap: 'break-word'}
             },
             {
                 header: minimumContribution,
@@ -58,14 +61,21 @@ class CampaignShow extends Component {
                 description: 'The balance is how much money this campaign has left to spend'
             }
         ];
-        return <Card.Group items={items} />
+        return <Card.Group items={items}/>
     }
 
     render() {
         return (
             <Layout>
-                show page
-                {this.renderCards()}
+                <h3>Campaign Show</h3>
+                <Grid>
+                    <Grid.Column width={10}>
+                        {this.renderCards()}
+                    </Grid.Column>
+                    <Grid.Column width={6}>
+                        <ContributeForm address={this.props.address}/>
+                    </Grid.Column>
+                </Grid>
             </Layout>
         )
     }
