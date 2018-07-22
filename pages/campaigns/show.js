@@ -30,7 +30,7 @@ class CampaignShow extends Component {
             balance,
             manager,
             minimumContribution,
-            requestCount,
+            requestsCount,
             approversCount
         } = this.props;
         const items = [
@@ -46,7 +46,7 @@ class CampaignShow extends Component {
                 description: 'You must contribute at least this much wei to become an approver'
             },
             {
-                header: requestCount,
+                header: requestsCount,
                 meta: 'Number of Requests',
                 description: 'A request tries to withdraw money from the contract. Request must be approved by approvers'
             },
